@@ -2,15 +2,23 @@ import { useContext, useEffect } from "react";
 import { ContextConsumer, products } from "../Context/constext";
 // const cart: number[] = [];
 const Home = () => {
-  const { items, setItems, cart, setCart, handleAddToCart } =
-    useContext(ContextConsumer);
+  const { items, setItems, cart, setCart } = useContext(ContextConsumer);
+  const handleAddToCart = async (product: products) => {
+    // const target = e.target as Element;
 
+    if (cart.includes(product)) {
+      setCart((prev) => prev.filter((p) => p.id !== product.id));
+    } else {
+      setCart((prev) => [...prev, product]);
+    }
+    // console.log(target.classList);
+  };
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((json) => setItems(json));
     // console.log("first");
-  }, []);
+  }, [setItems]);
 
   // console.log(cart);
   return (
@@ -36,7 +44,7 @@ const Home = () => {
               <input
                 type="button"
                 value={cart.includes(item) ? "Remove" : "Add to Cart"}
-                onClick={(e) => handleAddToCart(e, item)}
+                onClick={() => handleAddToCart(item)}
                 className={`flex  text-sm font-semibold  rounded-sm py-1 px-2 justify-center transition-all cursor-pointer  ${
                   cart.includes(item)
                     ? "bg-orange-300 hover:bg-orange-400 text-black"

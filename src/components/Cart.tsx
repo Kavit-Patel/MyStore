@@ -10,8 +10,7 @@ const Cart = () => {
   cart.map((c: products) => {
     total = total + Number(c.price);
   });
-  console.log(total);
-  console.log(total);
+
   const quantity = (id: number) => {
     const totalItems: products[] = cart.filter((c: products) => c.id == id);
     // console.log(totalItems);

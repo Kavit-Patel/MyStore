@@ -7,7 +7,13 @@ export type products = {
   description: string;
   image: string;
 };
-export const ContextConsumer = React.createContext({});
+export type ContextConsumerProps = {
+  items: products[];
+  setItems: React.Dispatch<React.SetStateAction<products[]>>;
+  cart: products[];
+  setCart: React.Dispatch<React.SetStateAction<products[]>>;
+};
+export const ContextConsumer = React.createContext({} as ContextConsumerProps);
 
 export const ContextProvider = ({
   children,
@@ -17,23 +23,8 @@ export const ContextProvider = ({
   const [items, setItems] = React.useState<products[]>([]);
   const [cart, setCart] = React.useState<products[]>([]);
 
-  const handleAddToCart = async (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-    product: products
-  ) => {
-    const target = e.target as Element;
-
-    if (cart.includes(product)) {
-      setCart((prev) => prev.filter((p) => p.id !== product.id));
-    } else {
-      setCart((prev) => [...prev, product]);
-    }
-    // console.log(target.classList);
-  };
   return (
-    <ContextConsumer.Provider
-      value={{ items, setItems, cart, setCart, handleAddToCart }}
-    >
+    <ContextConsumer.Provider value={{ items, setItems, cart, setCart }}>
       {children}
     </ContextConsumer.Provider>
   );
