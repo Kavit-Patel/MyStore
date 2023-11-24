@@ -24,7 +24,7 @@ const Cart = () => {
     // console.log(itemIndex);
     setCart((prev: products[]) =>
       prev.filter((p: products, i: number) => {
-        if (i !== itemIndex) {
+        if (i == itemIndex) {
           return;
         } else {
           return p;
@@ -53,8 +53,8 @@ const Cart = () => {
                   <div className=" flex flex-col justify-evenly">
                     <span>
                       {
-                        item?.title?.split(" ")[
-                          item?.title?.split(" ").length - 2
+                        item?.title.split(" ")[
+                          item?.title.split(" ").length - 2
                         ]
                       }
                     </span>

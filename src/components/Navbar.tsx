@@ -16,7 +16,7 @@ const Navbar = () => {
         >
           Cart
           <span className="absolute bottom-3 text-2xl text-emerald-700">
-            {cart?.length || 0}
+            {cart?.length}
           </span>
         </div>
       </div>
