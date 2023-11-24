@@ -23,7 +23,13 @@ const Cart = () => {
     const itemIndex = cart.findIndex((c: products) => c == product);
     // console.log(itemIndex);
     setCart((prev: products[]) =>
-      prev.filter((p: products, i: number) => i !== itemIndex)
+      prev.filter((p: products, i: number) => {
+        if (i !== itemIndex) {
+          return;
+        } else {
+          return p;
+        }
+      })
     );
   };
   const handleRemove = (id: number) => {
