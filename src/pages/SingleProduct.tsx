@@ -29,10 +29,10 @@ const SingleProduct = () => {
   }, [params.id]);
   return (
     <div className="w-full flex mt-10">
-      <div className="w-[40%] p-10">
-        <img src={product?.image} alt="" />
+      <div className="w-[30%] flex justify-center ">
+        <img className="w-44 object-cover " src={product?.image} alt="" />
       </div>
-      <div className="w-[35%] border-r flex flex-col gap-2">
+      <div className="w-[45%] border-r flex flex-col gap-2 px-3">
         <div className=" text-3xl">{product?.title}</div>
         <div className="flex items-center gap-2 ">
           <span>{product?.rating?.rate}</span>
@@ -102,7 +102,11 @@ const SingleProduct = () => {
           onClick={
             product ? () => handleAddToCart?.(product) : () => handleLoading()
           }
-          className="bg-yellow-400 w-44 text-center px-3 py-1 rounded-md text-xl font-semibold transition-all active:scale-95 "
+          className={`cursor-pointer w-44 text-center px-3 py-1 rounded-md text-xl font-semibold transition-all active:scale-95 ${
+            product && cart.some((c) => c.id == product.id)
+              ? "transition-all bg-sky-500 text-white hover:bg-sky-600"
+              : "transition-all bg-yellow-400 hover:bg-yellow-500"
+          }`}
         >
           {/* {product ? (cart.includes(product) ? "Remove" : "Add to Cart") : ""} */}
           {product
@@ -113,7 +117,7 @@ const SingleProduct = () => {
         </div>
         <Link
           to="/cart"
-          className="bg-yellow-400 w-44 text-center px-3 py-1 rounded-md text-xl font-semibold transition-all active:scale-95 "
+          className=" bg-emerald-600 text-white w-44 text-center px-3 py-1 rounded-md text-xl font-semibold transition-all active:scale-95 hover:bg-emerald-700"
         >
           Go To Cart
         </Link>
