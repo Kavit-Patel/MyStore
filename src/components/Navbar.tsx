@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import Cart from "./Cart";
 import { ContextConsumer } from "../Context/constext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -9,7 +10,9 @@ const Navbar = () => {
   return (
     <header className=" w-full h-16 bg-orange-200 shadow-xl z-10 flex justify-center">
       <div className="text-orange-950 font-semibold w-full flex justify-between px-8 items-center text-3xl">
-        <div className="cursor-pointer">MyStore</div>
+        <Link to="/" className="cursor-pointer">
+          MyStore
+        </Link>
         <div
           onClick={() => setOpen((prev) => !prev)}
           className="relative cursor-pointer"

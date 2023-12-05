@@ -1,29 +1,31 @@
 import { ContextConsumer } from "../Context/constext";
 import { useContext } from "react";
-import { products } from "../Context/constext";
+import { useLocation } from "react-router-dom";
+import { product } from "../Context/constext";
 
 const Cart = () => {
   const { cart, setCart } = useContext(ContextConsumer);
   const uniqueCart = Array.from(new Set(cart));
-  // console.log(cart);
+  const location = useLocation();
+  console.log(location.pathname);
   let total: number = 0;
-  cart.map((c: products) => {
+  cart.map((c: product) => {
     total = total + Number(c.price);
   });
 
   const quantity = (id: number) => {
-    const totalItems: products[] = cart.filter((c: products) => c.id == id);
+    const totalItems: product[] = cart.filter((c: product) => c.id == id);
     // console.log(totalItems);
     return totalItems.length;
   };
-  const increase = (product: products) => {
-    setCart((prev: products[]) => [...prev, product]);
+  const increase = (product: product) => {
+    setCart((prev: product[]) => [...prev, product]);
   };
-  const decrease = (product: products) => {
-    const itemIndex = cart.findIndex((c: products) => c == product);
+  const decrease = (product: product) => {
+    const itemIndex = cart.findIndex((c: product) => c == product);
     // console.log(itemIndex);
-    setCart((prev: products[]) =>
-      prev.filter((p: products, i: number) => {
+    setCart((prev: product[]) =>
+      prev.filter((p: product, i: number) => {
         if (i == itemIndex) {
           return;
         } else {
@@ -34,11 +36,15 @@ const Cart = () => {
   };
   const handleRemove = (id: number) => {
     setCart((prev) => {
-      return prev.filter((p: products) => p.id !== id);
+      return prev.filter((p: product) => p.id !== id);
     });
   };
   return (
-    <div className=" absolute top-16 right-0 w-full sm:w-1/3 h-[calc(100vh-4rem)] bg-orange-100">
+    <div
+      className={`absolute top-16 right-0  h-[calc(100vh-4rem)] bg-orange-100 ${
+        location.pathname == "/" ? "w-1/3" : "w-full px-80"
+      } `}
+    >
       <div className="w-full max-h-[70%] overflow-y-auto">
         {uniqueCart?.map((item) => (
           <div key={item.id} className="px-4 py-0.5 ">
