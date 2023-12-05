@@ -7,7 +7,7 @@ const Cart = () => {
   const { cart, setCart } = useContext(ContextConsumer);
   const uniqueCart = Array.from(new Set(cart));
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   let total: number = 0;
   cart.map((c: product) => {
     total = total + Number(c.price);

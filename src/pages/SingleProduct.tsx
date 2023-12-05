@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ContextConsumer, product } from "../Context/constext";
 import Loader from "../components/Loader";
+import Stars from "../utils/Stars";
 
 const SingleProduct = () => {
   const params = useParams();
   const [product, setProduct] = useState<product>();
   const { cart, handleAddToCart } = useContext(ContextConsumer);
-  console.log(cart);
+  // console.log(cart);
   const handleLoading = () => {
     <Loader />;
   };
@@ -35,8 +36,8 @@ const SingleProduct = () => {
         <div className=" text-3xl">{product?.title}</div>
         <div className="flex items-center gap-2 ">
           <span>{product?.rating?.rate}</span>
-          <span className="text-orange-600 text-xl">
-            {/* {console.log(Math.floor(product?.rating?.rate))} */}
+          <Stars rating={product?.rating?.rate} />
+          {/* <span className="text-orange-600 text-xl">
             {product?.rating?.rate ? (
               Math.floor(product.rating.rate) == 1 ? (
                 <span>&#9733;&#x2606;&#x2606;&#x2606;&#x2606;</span>
@@ -54,7 +55,7 @@ const SingleProduct = () => {
             ) : (
               ""
             )}
-          </span>
+          </span> */}
           <span>{product?.rating?.count}</span>
         </div>
         <div className="border-b-2 w-full h-0.5 "></div>
